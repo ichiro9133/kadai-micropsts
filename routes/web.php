@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+});
 
 // user registration
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
